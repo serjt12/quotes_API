@@ -20,7 +20,8 @@ class Quote extends Component {
 
   static propTypes = {
     newQuote: PropTypes.string,
-    newAuthor: PropTypes.string
+    newAuthor: PropTypes.string,
+    category: PropTypes.string,
   }
   constructor(props) {
     super(props)
@@ -28,6 +29,8 @@ class Quote extends Component {
     this.state ={
       newQuote: '',
       newAuthor: '',
+      category: '',
+      
 
     };
     this.onClick = this.onClick.bind(this);
@@ -45,10 +48,13 @@ class Quote extends Component {
     getData = () =>{
       axios.get(url, config)
         .then(res => {
-
+          console.log(res.data),
           this.setState({
+            
             newQuote: res.data.quote,
-            newAuthor: res.data.author
+            newAuthor: res.data.author,
+            category: res.data.category,
+            
           })
 
         })
@@ -66,12 +72,14 @@ class Quote extends Component {
   
 
   render() {
-  const {newQuote, newAuthor} = this.state;
+    const { newQuote, newAuthor, category} = this.state;
   
     return (
       <div className="box">
-        <h1 className="quote">"{newQuote}"</h1>
-        <h2 >-{newAuthor}</h2>        
+        <h1 >{category}</h1> 
+        <h2 className="quote">"{newQuote}"</h2>
+        <h3 >-{newAuthor}</h3>        
+               
        
      
       
